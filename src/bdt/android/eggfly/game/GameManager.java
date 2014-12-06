@@ -6,6 +6,7 @@ import org.anddev.andengine.engine.handler.IUpdateHandler;
  * Update entity enemy - basket
  */
 public class GameManager implements IUpdateHandler{
+	public static int intScore = 0;
 
 	/*
 	 * (non-Javadoc)

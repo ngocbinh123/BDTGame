@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 //Ad banner
+//Screen Game
 public class MainActivity extends Activity {
 
 	@Override
