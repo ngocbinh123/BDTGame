@@ -44,9 +44,9 @@ public class MainActivity_0ld extends BaseGameActivity {
 
 	 @Override
 	 public void onLoadResources() {
-		 this.mTexture = new Texture(1024, 1024,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		 //this.mTexture = new Texture(1024, 1024,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		 
-		 this.mTextureRegion = TextureRegionFactory.createFromAsset(this.mTexture, this, "tmx/skybg03.png", 0, 0);
+		 //this.mTextureRegion = TextureRegionFactory.createFromAsset(this.mTexture, this, "tmx/skybg03.png", 0, 0);
 		 this.mEngine.getTextureManager().loadTexture(this.mTexture);
 
 		  

@@ -1,5 +1,6 @@
 package bdt.android.eggfly;
 
+//Connect Network
 public class NetworkLayer extends ManagedLayer {
 
 	public NetworkLayer(int pLayerCount) {

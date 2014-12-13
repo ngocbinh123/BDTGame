@@ -10,6 +10,7 @@ public class InputTouch implements IOnSceneTouchListener {
 	@Override
 	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

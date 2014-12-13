@@ -1,5 +1,6 @@
 package bdt.android.eggfly.game;
 
+import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -18,7 +19,6 @@ public class ResourceManager extends Object {
 
 	public Texture mTextureBasket;
 	public TextureRegion mTextureRegionBasket;
-	public TextureRegion mTextureRegionBasket2;
 
 	public Texture mTextureEgg;
 	public TextureRegion mTextureRegionEgg;
@@ -26,12 +26,14 @@ public class ResourceManager extends Object {
 	public Texture mTextureBackground;
 	public TextureRegion mTextureRegionBackground;
 	
+	public Sprite mSpriteEgg;
+	
 	public Texture mAutoParallaxBackgroundTexture;
-
 	public TextureRegion mParallaxLayerBack;
 	public TextureRegion mParallaxLayerMid;
 	public TextureRegion mParallaxLayerFront;
 	
+	public int mMode = 0;
 	//public Context pContext;
 	
 
@@ -48,14 +50,17 @@ public class ResourceManager extends Object {
 	public void onLoadGameTexture(Context pContext) {
 		TextureRegionFactory.setAssetBasePath("tmx/");
 		
-		this.mTextureBasket = new Texture(512, 512,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mTextureBasket = new Texture(128, 128,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mTextureRegionBasket = TextureRegionFactory.createFromAsset(mTextureBasket, 
-				pContext, "basket02.png", 0, 0);
+				pContext, "basket.png", 0, 0);
 		
 		
-		this.mTextureEgg = new Texture(256, 256,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mTextureEgg = new Texture(64, 64,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mTextureRegionEgg = TextureRegionFactory.createFromAsset(mTextureEgg, 
 				pContext, "egg.png", 0, 0);
+
+		this.mSpriteEgg = new Sprite(0, 0, ResourceManager.INSTANCE.mTextureRegionEgg);
+		
 		this.mAutoParallaxBackgroundTexture = new Texture(2048, 2048,TextureOptions.DEFAULT);
 		this.mParallaxLayerFront =TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, pContext, "skybg04.png", 0,0);
 	    this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture,  pContext, "skybg04.png", 0,188);

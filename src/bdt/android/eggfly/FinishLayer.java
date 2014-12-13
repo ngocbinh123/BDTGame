@@ -1,5 +1,11 @@
 package bdt.android.eggfly;
 
-public class FinishLayer {
+//End Game
+public class FinishLayer extends ManagedLayer{
+
+	public FinishLayer(int pLayerCount) {
+		super(pLayerCount);
+		// TODO Auto-generated constructor stub
+	}
 
 }

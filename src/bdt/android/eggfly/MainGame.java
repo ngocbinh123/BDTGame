@@ -101,7 +101,14 @@ public class MainGame extends BaseGameActivity {
 		// add character to scene
 
 		// register character
-
+		Eggs.INSTANCE = new Eggs();
+		Eggs.INSTANCE.floatX = 150;
+		Eggs.INSTANCE.floatY = 350;
+		Eggs.INSTANCE.gravity = -0.5f;
+		Eggs.INSTANCE.velocityX = 0;
+		Eggs.INSTANCE.velocityY = -12;
+		
+		scene.attachChild(ResourceManager.INSTANCE.mSpriteEgg);
 		// set move enemy - basket
 		
 		// update cycle game
