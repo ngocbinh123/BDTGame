@@ -20,6 +20,7 @@ import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 
+
 import android.util.DisplayMetrics;
 import bdt.android.eggfly.character.Basket;
 import bdt.android.eggfly.character.Eggs;
@@ -28,21 +29,22 @@ import bdt.android.eggfly.game.ResourceManager;
 import bdt.android.eggfly.input.InputTouch;
 import bdt.android.eggfly.background.ParallaxBackground2d;
 import bdt.android.eggfly.background.AutoVerticalParallaxBackground;
+import bdt.android.eggfly.background.ScrollableParallaxBackground;
 public class MainGame extends BaseGameActivity {
 	private static int CAMERA_WIDTH;
 	private static int CAMERA_HEIGHT;
 
-	private Camera mCamera;
+	public Camera mCamera;
 	private Scene scene;
 	
 
 	private Eggs mSpriteEggs;
 	private Basket mSpriteBasket;
 	
+	public ScrollableParallaxBackground backgroundParallax;
     
 	private static MainGame INSTANCE = new MainGame();
-
-
+	
 	public static MainGame getInstance() {
 		return INSTANCE;
 	}
@@ -52,7 +54,6 @@ public class MainGame extends BaseGameActivity {
 		// TODO Auto-generated method stub
 		// load thông số màn hình của thiết bị
 		// load thông số màn hình của thiết bị
-
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int width = dm.widthPixels;
@@ -87,9 +88,12 @@ public class MainGame extends BaseGameActivity {
 		// TODO Auto-generated method stub
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 		final Scene scene = new Scene();
+		
+		backgroundParallax = new ScrollableParallaxBackground(0, 0, 0, mCamera);
+		final AutoVerticalParallaxBackground autoParallaxBackground = new AutoVerticalParallaxBackground(0, 0, 0, 1);
+		final ScrollableParallaxBackground backgroundParallax= new ScrollableParallaxBackground(0, 0, 0, mCamera);
 
-		final AutoVerticalParallaxBackground autoParallaxBackground = new AutoVerticalParallaxBackground(0, 0, 0, 200);
-        autoParallaxBackground.addParallaxEntity(new ParallaxBackground2d.ParallaxBackground2dEntity(-0.2f,-0.2f, new Sprite(0, 0, ResourceManager.INSTANCE.mParallaxLayerMid)));
+		autoParallaxBackground.addParallaxEntity(new ParallaxBackground2d.ParallaxBackground2dEntity(-0.2f,-0.2f, new Sprite(0, 0, ResourceManager.INSTANCE.mParallaxLayerMid)));
         scene.setBackground(autoParallaxBackground);
 		
 		final float centerX = (CAMERA_WIDTH - ResourceManager.INSTANCE.mTextureBackground.getWidth())/2;

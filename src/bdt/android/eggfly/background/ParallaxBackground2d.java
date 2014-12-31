@@ -1,8 +1,12 @@
 package bdt.android.eggfly.background;
 
 import android.annotation.SuppressLint;
+import android.provider.CalendarContract.Instances;
+
 import java.util.ArrayList;
+
 import javax.microedition.khronos.opengles.GL10;
+
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.shape.Shape;
@@ -52,8 +56,8 @@ public class ParallaxBackground2d extends ColorBackground {
 	private final ArrayList<ParallaxBackground2dEntity> mParallaxEntities = new ArrayList<ParallaxBackground2dEntity>();
 	private int mParallaxEntityCount;
 
-	protected float mParallaxValueX;
-	protected float mParallaxValueY;
+	public static float mParallaxValueX;
+	public static float mParallaxValueY;
 
 	// ===========================================================
 	// Constructors

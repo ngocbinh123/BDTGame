@@ -8,8 +8,8 @@ public class AutoVerticalParallaxBackground extends ParallaxBackground2d {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-
 	private final float mParallaxChangePerSecond;
+	public static float changePerSecond;
 
 	// ===========================================================
 	// Constructors
@@ -19,6 +19,7 @@ public class AutoVerticalParallaxBackground extends ParallaxBackground2d {
 			final float pBlue, final float pParallaxChangePerSecond) {
 		super(pRed, pGreen, pBlue);
 		this.mParallaxChangePerSecond = pParallaxChangePerSecond;
+		this.changePerSecond = pParallaxChangePerSecond;
 	}
 
 	// ===========================================================
@@ -32,8 +33,7 @@ public class AutoVerticalParallaxBackground extends ParallaxBackground2d {
 	@Override
 	public void onUpdate(final float pSecondsElapsed) {
 		super.onUpdate(pSecondsElapsed);
-
-		this.mParallaxValueY += this.mParallaxChangePerSecond * pSecondsElapsed;
+		this.mParallaxValueY -= this.mParallaxChangePerSecond * pSecondsElapsed;
 	}
 
 	// ===========================================================
