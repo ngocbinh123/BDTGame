@@ -34,6 +34,8 @@ public class MainGame extends BaseGameActivity {
 	private static int CAMERA_WIDTH;
 	private static int CAMERA_HEIGHT;
 
+	public int width;
+	public int height;
 	public Camera mCamera;
 	private Scene scene;
 	
@@ -56,8 +58,8 @@ public class MainGame extends BaseGameActivity {
 		// load thông số màn hình của thiết bị
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int width = dm.widthPixels;
-		int height = dm.heightPixels;
+		width = dm.widthPixels;
+		height = dm.heightPixels;
 		CAMERA_WIDTH = width;
 		CAMERA_HEIGHT = height;
 		// /////////////////////////////////////
@@ -114,8 +116,14 @@ public class MainGame extends BaseGameActivity {
 		
 		scene.attachChild(ResourceManager.INSTANCE.mSpriteEgg);
 		// set move enemy - basket
+		Basket.INSTANCE = new Basket();
+		Basket.INSTANCE.generatePosition();
 		
-		// update cycle game
+		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket1);
+		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket2);
+		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket3);
+		
+		// updante cycle game
 		GameManager update = new GameManager();
 		InputTouch input = new InputTouch();
 		

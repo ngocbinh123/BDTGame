@@ -6,6 +6,7 @@ import org.anddev.andengine.input.touch.TouchEvent;
 
 import bdt.android.eggfly.MainGame;
 import bdt.android.eggfly.background.AutoVerticalParallaxBackground;
+import bdt.android.eggfly.character.Eggs;
 
 // handle input user
 public class InputTouch implements IOnSceneTouchListener {
@@ -15,7 +16,7 @@ public class InputTouch implements IOnSceneTouchListener {
 	@Override
 	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
 		// TODO Auto-generated method stub
-
+		Eggs.INSTANCE.isJump = true;
 		AutoVerticalParallaxBackground.mParallaxValueY -= AutoVerticalParallaxBackground.changePerSecond * 100;
         return true;
 	}

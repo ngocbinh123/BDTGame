@@ -2,15 +2,15 @@ package bdt.android.eggfly.character;
 
 import org.anddev.andengine.engine.handler.IUpdateHandler;
 import org.anddev.andengine.entity.sprite.Sprite;
-import org.anddev.andengine.entity.scene.Scene;
 
 /*
  * Manage Eggs
  */
 public class Eggs implements IUpdateHandler {
 	Sprite mEgg;
-	private static int MAX_WIDTH = 480;
-	private static int MAX_HEIGHT = 1024;
+	static float MAX_WIDTH = 480;
+	static float MAX_HEIGHT = 800;
+	static float minY = 400;
 
 	public static Eggs INSTANCE = new Eggs();
 
@@ -21,8 +21,10 @@ public class Eggs implements IUpdateHandler {
 	public float velocityX = 0;
 	public float velocityY = 0;
 	public float gravity = 0.5f;
-	boolean onGround = false;
-
+	public boolean isOnGround = false;
+	public boolean isJump = false;
+	
+	
 	public Eggs() {
 		// TODO Auto-generated constructor stub
 		// initial Eggs
@@ -79,31 +81,38 @@ public class Eggs implements IUpdateHandler {
 
 	// reset Position
 	public void resetPosition() {
-
+		floatX = 180;
+		floatY = 600;
+		gravity = 0.5f;
+		velocityX = 0;
+		velocityY = 1;
 	}
 	
 	public void updatePosition_ByTime(float time)
 	{
-	    floatX += velocityX * time;      // Apply horizontal velocity to X position
-	    floatY += velocityY * time;      // Apply vertical velocity to X position
-	    velocityY += gravity * time;        // Apply gravity to vertical velocity
+	    floatX += velocityX;      // Apply horizontal velocity to X position
+	    floatY += velocityY;      // Apply vertical velocity to X position
+	    velocityY += gravity;        // Apply gravity to vertical velocity
 	    
-	    if(floatY > 175.0)
+	    //test collision
+	    
+	    if((velocityY < 0 && floatY > MAX_HEIGHT -200) || floatY < 0 || floatX < 0 || floatX > MAX_WIDTH)
 	    {
-	    	floatY = 175;
+	    	floatY = MAX_HEIGHT;
 	        velocityY = 0;
-	        onGround = true;
-	    }
+	        isOnGround = true;
+	        isJump = false;
+	    }	    
 	    
-	    if(floatX < 10 || floatX > 190)
-	        velocityX *= -1;
+	    if(floatY < minY) //Nhảy đến 1 mức nào đó thì quay đầu
+	        velocityY *= -1;
 	}
 	
 	public void updatePositionY(int mode)
 	{
 		switch (mode) {
 		case 0: //Bay thẳng
-			floatY--;
+			floatY = floatY - velocityY;
 			break;
 		case 1: //Bay xiên
 			floatY = floatX * (velocityY / velocityX) - 
@@ -112,7 +121,7 @@ public class Eggs implements IUpdateHandler {
 			break;
 		default:
 			break;
-		}		
+		}
 	}
 	
 		

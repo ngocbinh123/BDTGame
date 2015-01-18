@@ -28,6 +28,10 @@ public class ResourceManager extends Object {
 	
 	public Sprite mSpriteEgg;
 	
+	public Sprite mSpriteBasket1;
+	public Sprite mSpriteBasket2;
+	public Sprite mSpriteBasket3;
+	
 	public Texture mAutoParallaxBackgroundTexture;
 	public TextureRegion mParallaxLayerBack;
 	public TextureRegion mParallaxLayerMid;
@@ -61,10 +65,15 @@ public class ResourceManager extends Object {
 
 		this.mSpriteEgg = new Sprite(0, 0, ResourceManager.INSTANCE.mTextureRegionEgg);
 		
+		this.mSpriteBasket1 = new Sprite(0, 0, ResourceManager.INSTANCE.mTextureRegionBasket);
+		this.mSpriteBasket2 = new Sprite(0, 0, ResourceManager.INSTANCE.mTextureRegionBasket);
+		this.mSpriteBasket3 = new Sprite(0, 0, ResourceManager.INSTANCE.mTextureRegionBasket);
+		
 		this.mAutoParallaxBackgroundTexture = new Texture(2048, 2048,TextureOptions.DEFAULT);
 		this.mParallaxLayerFront =TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, pContext, "skybg04.png", 0,0);
 	    this.mParallaxLayerBack = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture,  pContext, "skybg04.png", 0,188);
 	    this.mParallaxLayerMid = TextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, pContext, "skybg04.png", 0,669);
+	
 	}
 	
 	public void onLoadBackgroundTexture(Context pContext) {
