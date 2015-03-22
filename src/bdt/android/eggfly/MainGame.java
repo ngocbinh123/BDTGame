@@ -6,24 +6,19 @@ import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
-import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
-import org.anddev.andengine.entity.scene.background.SpriteBackground;
 import org.anddev.andengine.entity.sprite.Sprite;
-import org.anddev.andengine.entity.sprite.TiledSprite;
 import org.anddev.andengine.entity.util.FPSLogger;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 
 
+
+
 import android.util.DisplayMetrics;
+import android.util.Log;
 import bdt.android.eggfly.character.Basket;
 import bdt.android.eggfly.character.Eggs;
+import bdt.android.eggfly.data.ConstValiable;
 import bdt.android.eggfly.game.GameManager;
 import bdt.android.eggfly.game.ResourceManager;
 import bdt.android.eggfly.input.InputTouch;
@@ -31,17 +26,9 @@ import bdt.android.eggfly.background.ParallaxBackground2d;
 import bdt.android.eggfly.background.AutoVerticalParallaxBackground;
 import bdt.android.eggfly.background.ScrollableParallaxBackground;
 public class MainGame extends BaseGameActivity {
-	private static int CAMERA_WIDTH;
-	private static int CAMERA_HEIGHT;
+	ConstValiable mConsInstance = ConstValiable.INSTANCE;
 
-	public int width;
-	public int height;
 	public Camera mCamera;
-	private Scene scene;
-	
-
-	private Eggs mSpriteEggs;
-	private Basket mSpriteBasket;
 	
 	public ScrollableParallaxBackground backgroundParallax;
     
@@ -58,15 +45,15 @@ public class MainGame extends BaseGameActivity {
 		// load thông số màn hình của thiết bị
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		width = dm.widthPixels;
-		height = dm.heightPixels;
-		CAMERA_WIDTH = width;
-		CAMERA_HEIGHT = height;
+		mConsInstance.mCameraWidth =dm.widthPixels;
+		mConsInstance.mCameraHeight = dm.heightPixels;
+		mConsInstance.mBasketsize = dm.heightPixels / 300;
+
 		// /////////////////////////////////////
-		this.mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		this.mCamera = new Camera(0, 0, mConsInstance.mCameraWidth, mConsInstance.mCameraHeight);
 		final Engine engine = new Engine(new EngineOptions(true,
 				ScreenOrientation.PORTRAIT, new RatioResolutionPolicy(
-						CAMERA_WIDTH, CAMERA_HEIGHT), this.mCamera)
+						mConsInstance.mCameraWidth, mConsInstance.mCameraHeight), this.mCamera)
 				.setNeedsMusic(true).setNeedsSound(true));
 		return engine;
 	}
@@ -93,13 +80,9 @@ public class MainGame extends BaseGameActivity {
 		
 		backgroundParallax = new ScrollableParallaxBackground(0, 0, 0, mCamera);
 		final AutoVerticalParallaxBackground autoParallaxBackground = new AutoVerticalParallaxBackground(0, 0, 0, 1);
-		final ScrollableParallaxBackground backgroundParallax= new ScrollableParallaxBackground(0, 0, 0, mCamera);
-
+		
 		autoParallaxBackground.addParallaxEntity(new ParallaxBackground2d.ParallaxBackground2dEntity(-0.2f,-0.2f, new Sprite(0, 0, ResourceManager.INSTANCE.mParallaxLayerMid)));
         scene.setBackground(autoParallaxBackground);
-		
-		final float centerX = (CAMERA_WIDTH - ResourceManager.INSTANCE.mTextureBackground.getWidth())/2;
-	    final float centerY = (CAMERA_HEIGHT - ResourceManager.INSTANCE.mTextureBackground.getHeight())/2;
 
 		//scene.attachChild(sprite);
 		
@@ -107,21 +90,28 @@ public class MainGame extends BaseGameActivity {
 		// add character to scene
 
 		// register character
-		Eggs.INSTANCE = new Eggs();
-		Eggs.INSTANCE.floatX = 150;
-		Eggs.INSTANCE.floatY = 350;
-		Eggs.INSTANCE.gravity = -0.5f;
-		Eggs.INSTANCE.velocityX = 0;
-		Eggs.INSTANCE.velocityY = -12;
+//		Eggs.INSTANCE = new Eggs();
+//		Eggs.INSTANCE.floatX = 150;
+//		Eggs.INSTANCE.floatY = 350;
+//		Eggs.INSTANCE.gravity = -0.5f;
+//		Eggs.INSTANCE.velocityX = 0;
+//		Eggs.INSTANCE.velocityY = -12;
+//		
+        Eggs.INSTANCE = new Eggs();
+		Eggs.INSTANCE.resetPosition();
+		ResourceManager.INSTANCE.mSpriteEgg.setPosition(Eggs.INSTANCE.floatX, Eggs.INSTANCE.floatY);
 		
 		scene.attachChild(ResourceManager.INSTANCE.mSpriteEgg);
 		// set move enemy - basket
 		Basket.INSTANCE = new Basket();
 		Basket.INSTANCE.generatePosition();
 		
-		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket1);
-		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket2);
-		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket3);
+		for(int i =0; i <ResourceManager.INSTANCE.arrSprite.size();i++)
+		{
+			scene.attachChild(ResourceManager.INSTANCE.arrSprite.get(i));
+		}
+//		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket2);
+//		scene.attachChild(ResourceManager.INSTANCE.mSpriteBasket3);
 		
 		// updante cycle game
 		GameManager update = new GameManager();

@@ -6,6 +6,9 @@ import java.util.Random;
 import org.anddev.andengine.engine.handler.IUpdateHandler;
 import org.anddev.andengine.entity.sprite.Sprite;
 
+import android.util.Log;
+import bdt.android.eggfly.data.ConstValiable;
+
 /*
  * Manage Basket
  */
@@ -14,40 +17,29 @@ public class Basket implements IUpdateHandler {
 
 	public static Basket INSTANCE = new Basket();
 	public LinkedList<BasketObject> mBasketObjList = new LinkedList<BasketObject>();
-
+	public ConstValiable constInstance = ConstValiable.INSTANCE;
 	public Basket() {
-		// TODO Auto-generated constructor stub
-		/*BasketObject obj1 = new BasketObject();
-		BasketObject obj2 = new BasketObject();
-		BasketObject obj3 = new BasketObject();
-		mBasketObjList.add(obj1);
-		mBasketObjList.add(obj2);
-		mBasketObjList.add(obj3);*/
 	}
 
 	//generate random position when initial basket
 	public void generatePosition() {
-		BasketObject obj1 = new BasketObject();
-		BasketObject obj2 = new BasketObject();
-		BasketObject obj3 = new BasketObject();
-		mBasketObjList.add(obj1);
-		mBasketObjList.add(obj2);
-		mBasketObjList.add(obj3);
-		
-		for (int i = 0; i < 3; i++) {
+
+		for (int i = 0; i < constInstance.mBasketsize; i++) {
+			BasketObject obj = new BasketObject(); 
+			mBasketObjList.add(obj);
 			mBasketObjList.get(i).generatePosition(i);
 		}
 	}
 	
 	// Cuộn rổ và tạo mới rổ thứ 3
-	public void generateNextPosition() {
-		mBasketObjList.remove(0);
-		mBasketObjList.get(0).floatY += 200;
-		mBasketObjList.get(1).floatY += 200;
-		
-		BasketObject obj3 = new BasketObject();
-		mBasketObjList.add(obj3);
-	}
+//	public void generateNextPosition() {
+//		mBasketObjList.remove(0);
+//		mBasketObjList.get(0).floatY += 200;
+//		mBasketObjList.get(1).floatY += 200;
+//		
+//		BasketObject obj3 = new BasketObject();
+//		mBasketObjList.add(obj3);
+//	}
 
 	// move Basket
 	/*

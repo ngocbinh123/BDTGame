@@ -15,9 +15,16 @@ public class InputTouch implements IOnSceneTouchListener {
 	public Camera mCamera = MainGame.getInstance().mCamera;
 	@Override
 	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
-		// TODO Auto-generated method stub
-		Eggs.INSTANCE.isJump = true;
+		// handle background 
 		AutoVerticalParallaxBackground.mParallaxValueY -= AutoVerticalParallaxBackground.changePerSecond * 100;
+		
+		// handle egg
+		Eggs.INSTANCE.isJump = true;
+		Eggs.INSTANCE.isOnGround = false;
+		Eggs.INSTANCE.isInBasket = false;
+		if (Eggs.INSTANCE.velocityY > 0)
+			Eggs.INSTANCE.velocityY *= -1;
+
         return true;
 	}
 
